@@ -6,11 +6,11 @@ const passport = require("passport");
 var { checkAuthenticated, checkNotAuthenticated } = require("../services/checkRightsService");
 
 /* GET users listing. */
-router.get("/login", checkNotAuthenticated, function (req, res, next) {
+router.get("/login", checkNotAuthenticated, function (req, res) {
   res.render("login", { title: "ExpressCMS" });
 });
 
-router.get("/register", checkNotAuthenticated, function (req, res, next) {
+router.get("/register", checkNotAuthenticated, function (req, res) {
   res.render("register", { title: "ExpressCMS" });
 });
 

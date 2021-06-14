@@ -16,7 +16,7 @@ router.get("/", async function (req, res, next) {
   while (await postsCursor.hasNext()) {
       posts.push(await postsCursor.next());
   }
-  res.render("index", { title: "ExpressCMS", name: name, loggedIn: loggedIn, data: posts });
+  res.render("index", { title: "ExpressCMS", name: name, loggedIn: loggedIn, posts: posts });
 });
 
 module.exports = router;

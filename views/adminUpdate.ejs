@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    admin pannel
+    <form action="/admin/update" method="POST">
+      <label for="title">Enter title: </label>
+      <input id="title" type="text" name="title" value="<%=postToUpdate.title%>" />
+
+      <label for="text">Enter text: </label>
+      <input id="text" type="text" name="text" value="<%=postToUpdate.text%>" />
+
+      <input type="hidden" name="_id" value="<%=postToUpdate._id%>" /> 
+
+      <input type="submit" value="OK" />
+    </form>
+  </body>
+</html>

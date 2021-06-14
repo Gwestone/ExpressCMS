@@ -15,5 +15,17 @@
 
       <input type="submit" value="OK" />
     </form>
+
+    <% for(var i=0; i < posts.length; i++) { %>
+      <div>
+        <tr>
+          <td><%= posts[i].title %></td>
+          <td><%= posts[i].text %></td>
+          <td><%= posts[i].author_name %></td>
+          <td><a href="/admin/update/<%=posts[i]._id%>">Edit</a></td>
+          <td><a href="/admin/delete/<%=posts[i]._id%>">Delete</a></td>
+        </tr>
+      </div>
+   <% } %>
   </body>
 </html>
