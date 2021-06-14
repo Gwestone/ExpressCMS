@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <% if(loggedIn){ %>
+      <p>Hello <%=name %></p>
+      <form action="/logout" method="get" >
+        <button type="submit">LogOut</button>
+      </form>
+    <%}else{%>
+      <p>Hello guest</p>
+      <p><a href="/login">Login</a></p>
+    <% } %>
+  </body>
+</html>

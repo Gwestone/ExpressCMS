@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <%if (messages.error) { %> 
+      <% messages.error %> 
+    <% } %>
+    <form action="/login/" method="post">
+      <label for="email">Enter email: </label>
+      <input id="email" type="text" name="email" placeholder="example@example.com..." />
+
+      <label for="password">Enter password: </label>
+      <input id="password" type="text" name="password" />
+
+      <input type="submit" value="OK" />
+    </form>
+  </body>
+</html>
