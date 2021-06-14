@@ -11,8 +11,12 @@ router.get("/", async function (req, res, next) {
     name = user.username;
     loggedIn = true;
   }
-
-  res.render("index", { title: "ExpressCMS", name: name, loggedIn: loggedIn });
+  var posts = []
+  var postsCursor = await req.app.get('db').collection('posts').find({}).limit(10);
+  while (await postsCursor.hasNext()) {
+      posts.push(await postsCursor.next());
+  }
+  res.render("index", { title: "ExpressCMS", name: name, loggedIn: loggedIn, data: posts });
 });
 
 module.exports = router;

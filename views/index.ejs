@@ -15,6 +15,16 @@
     <%}else{%>
       <p>Hello guest</p>
       <p><a href="/login">Login</a></p>
+      <p><a href="/register">Register</a></p>
     <% } %>
+
+    <% for(var i=0; i < data.length; i++) { %>
+      <tr>
+        <td><%= data[i].title %></td>
+        <td><%= data[i].text %></td>
+        <td><%= data[i].author_name %></td>
+      </tr>
+   <% } %>
+
   </body>
 </html>

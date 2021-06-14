@@ -3,7 +3,7 @@ var router = express.Router();
 var bcrypt = require("bcrypt");
 const app = require("../app");
 const passport = require("passport");
-var { checkAuthenticated, checkNotAuthenticated } = require("../services/checkAuthenticatedService");
+var { checkAuthenticated, checkNotAuthenticated } = require("../services/checkRightsService");
 
 /* GET users listing. */
 router.get("/login", checkNotAuthenticated, function (req, res, next) {
@@ -14,10 +14,7 @@ router.get("/register", checkNotAuthenticated, function (req, res, next) {
   res.render("register", { title: "ExpressCMS" });
 });
 
-router.post(
-  "/login",
-  checkNotAuthenticated,
-  passport.authenticate("local", {
+router.post("/login", checkNotAuthenticated, passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true,
@@ -39,6 +36,7 @@ router.post(
         username: username,
         email: email,
         passwordHash: hashedPassword,
+        acessRights: 1
       });
     res.redirect("/");
   }
