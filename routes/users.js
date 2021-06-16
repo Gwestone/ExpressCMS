@@ -42,7 +42,7 @@ router.post(
   }
 );
 
-router.get('/logout', checkAuthenticated, function (req, res) {
+router.get("/logout", checkAuthenticated, function (req, res) {
   req.logOut()
   res.redirect(req.url);
 });

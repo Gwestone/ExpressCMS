@@ -12,7 +12,7 @@ router.get("/", async function (req, res, next) {
     loggedIn = true;
   }
   var posts = []
-  var postsCursor = await req.app.get('db').collection('posts').find({}).limit(10);
+  var postsCursor = await req.app.get("db").collection("posts").find({}).limit(10);
   while (await postsCursor.hasNext()) {
       posts.push(await postsCursor.next());
   }

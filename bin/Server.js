@@ -5,7 +5,7 @@
  * this app will take 1(master thread) + instancesNum(worker threads)
 */
 
-var cluster = require('cluster')
+var cluster = require("cluster")
 var instancesNum = 5;
 
 /**
@@ -24,9 +24,9 @@ function masterFunction() {
   for (var i = 0; i < instancesNum; i++) {
     cluster.fork();
   }
-  console.log('all workers was launched');
+  console.log("all workers was launched");
 
-  cluster.on('exit', (worker, code, signal) => {
+  cluster.on("exit", (worker, code, signal) => {
     console.log(`worker ${worker.process.pid} died`);
   });
 
@@ -34,16 +34,16 @@ function masterFunction() {
 
 function workerFunction() {
   console.log(`Worker process: ${process.pid} is running`);
-  var app = require('../app');
-  var debug = require('debug')('cms:server');
-  var http = require('http');
+  var app = require("../app");
+  var debug = require("debug")("cms:server");
+  var http = require("http");
 
   /**
    * Get port from environment and store in Express.
    */
 
-  var port = normalizePort(process.env.PORT || '3000');
-  app.set('port', port);
+  var port = normalizePort(process.env.PORT || "3000");
+  app.set("port", port);
 
   /**
    * Create HTTP server.
@@ -56,8 +56,8 @@ function workerFunction() {
    */
 
   server.listen(port);
-  server.on('error', onError);
-  server.on('listening', onListening);
+  server.on("error", onError);
+  server.on("listening", onListening);
 
   /**
    * Normalize a port into a number, string, or false.
@@ -84,22 +84,22 @@ function workerFunction() {
    */
 
   function onError(error) {
-    if (error.syscall !== 'listen') {
+    if (error.syscall !== "listen") {
       console.log(`Primary ${process.pid} throwed an error:`);
       throw error;
     }
 
-    var bind = typeof port === 'string'
-      ? 'Pipe ' + port
-      : 'Port ' + port;
+    var bind = typeof port === "string"
+      ? "Pipe " + port
+      : "Port " + port;
 
     // handle specific listen errors with friendly messages
     switch (error.code) {
-      case 'EACCES':
+      case "EACCES":
         console.error(`Worker process ${process.pid} requires elevated privileges, throwed error`);
         process.exit(1);
         break;
-      case 'EADDRINUSE':
+      case "EADDRINUSE":
         console.error(`Worker process ${process.pid} is already in use`);
         process.exit(1);
         break;
@@ -115,9 +115,9 @@ function workerFunction() {
   function onListening() {
     console.error(`Worker process: ${process.pid} is listening`);
     var addr = server.address();
-    var bind = typeof addr === 'string'
-      ? 'pipe ' + addr
-      : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    var bind = typeof addr === "string"
+      ? "pipe " + addr
+      : "port " + addr.port;
+    debug("Listening on " + bind);
   }
 }

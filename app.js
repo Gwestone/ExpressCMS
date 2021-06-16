@@ -4,6 +4,10 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var MongoClient = require("mongodb").MongoClient;
+require("dotenv").config();
+var fs = require("fs");
+var getTimeWhole = require("./services/timeService");
+var createFileForLogger = require("./services/fileService")
 
 var initPassport = require("./services/passportConfigService");
 var passport = require("passport");
@@ -31,6 +35,14 @@ app.use(
   })
 );
 app.use(flash());
+
+var dateString = getTimeWhole();
+var filename = `./logs/${process.pid}@${dateString}.log`
+
+//logging into file and console
+app.use(logger("common", {
+  stream: fs.createWriteStream(filename, {flags: 'w'})
+}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -69,7 +81,7 @@ app.use(function (err, req, res, next) {
 });
 
 MongoClient.connect(
-  "mongodb://localhost:27017/CMS",
+  process.env.DB_HOST,
   { useUnifiedTopology: true },
   (err, client) => {
     if (err) console.error(err);
