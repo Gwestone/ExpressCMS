@@ -21,6 +21,7 @@ var postRouter = require("./routes/post");
 var expressSession = require("express-session");
 const flash = require("express-flash");
 const { ObjectId } = require("mongodb");
+const { env } = require("process");
 var app = express();
 
 // view engine setup
@@ -40,9 +41,11 @@ var dateString = getTimeWhole();
 var filename = `./logs/${process.pid}@${dateString}.log`
 
 //logging into file and console
-app.use(logger("common", {
-  stream: fs.createWriteStream(filename, {flags: 'w'})
-}));
+if(process.env.STATE !== "DEBUG")
+  app.use(logger("common", {
+    stream: fs.createWriteStream(filename, {flags: 'wx'})
+  }));
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
